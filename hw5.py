@@ -3,7 +3,7 @@ import csv
 import json
 import pickle
 import string
-from collections import Counter
+
 
 def main(filename):
     # read file into lines
@@ -25,13 +25,14 @@ def main(filename):
             # "dream." => "dream"
             word = word.strip(string.punctuation)
             # check if word is not empty
-            if word != (" "):
+            if word != (""):
                 # append the word to "all_words" list
                 all_words.append(word)
 
     # compute word count from all_words
+    from collections import Counter
     counter = Counter(all_words)
-    counter.update(all_words)
+    counter.most_common(all_words)
 
     # dump to a csv file named "wordcount.csv":
     # word,count
@@ -44,11 +45,11 @@ def main(filename):
         # write table head
         writer.writerow(['word', 'count'])
         # write all (word, count) pair into the csv writer
-        writer.writerows(counter.items())
+        writer.writerows(counter.most_common())
 
     # dump to a json file named "wordcount.json"
     with open("wordcount.json",'w') as json_file:
-        json.dump(counter,json_file)
+        json.dump(counter.most_common(),json_file)
 
     # BONUS: dump to a pickle file named "wordcount.pkl"
     with open("wordcount.pkl","wb") as pkl_file:
