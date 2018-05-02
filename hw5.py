@@ -25,9 +25,9 @@ def main(filename):
             # "dream." => "dream"
             word = word.strip(string.punctuation)
             # check if word is not empty
-            word = word.strip()
+            if word:
                 # append the word to "all_words" list
-            all_words.append(word)
+                all_words.append(word)
 
     # compute word count from all_words
     from collections import Counter
